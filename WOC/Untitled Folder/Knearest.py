@@ -42,7 +42,7 @@ class KNN:
         
      def k_neighbors(self):
        
-        euc_dist = euclideanDistance(self , point)
+        euc_dist = euclideanDistance(point)
         neighbors = self.y[euc_dist]
         k_nearest_neighbors = neighbors[:self.k]
         return nearest_neighbors
