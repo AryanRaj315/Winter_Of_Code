@@ -50,15 +50,13 @@ class K_Means:
             cluster_num[i] = np.argmin(dist)
         return cluster_num.reshape(self.m,1)  
         
-    def centroid_update(self, centroid):
-        centroid_index = Cluster_assignment(self)
-        loop_val = np.unique(centroid_index)
+    def centroid_update(self):
+        centroid_index = self.Cluster_assignment(self)
+        new_centroids = np.zeros((self.k, 2))
         for i in range(self.k):
-            a = i in loop_val
-            if(a == 'false'):
-                new_centroids[i] = self.centroid[i] 
-            else:
-                new_centroids[i] = np.average(self.x[(np.argwhere(centroid_index == i)).flatten(),:], axis = 0) 
+            z = len((np.argwhere(centroid_index == i))[:,0])
+            a = ((np.argwhere(centroid_index == i))[:,0]).reshape(z,1).flatten()
+            new_centroids[i] = (self.x[a,:]).mean(0)   
         return new_centroids
     
     
